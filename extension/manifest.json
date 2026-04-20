@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Bili Live Subtitle",
+  "version": "0.1.6",
+  "description": "Local-first external subtitles for bilibili video pages.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.bilibili.com/video/*",
+    "https://api.bilibili.com/*",
+    "https://*.bilivideo.com/*",
+    "https://*.hdslb.com/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.bilibili.com/video/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "subtitle-overlay.js",
+        "state-manager.js",
+        "source-detector.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "page-bridge.js"
+      ],
+      "matches": [
+        "https://www.bilibili.com/*"
+      ]
+    }
+  ]
+}
